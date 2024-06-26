@@ -1,0 +1,41 @@
+
+  {% load static %}
+{% include "main.html" %}
+{% block body %}
+<div class="">
+
+    <!-- dashboard/templates/dashboard/dashboardhtml -->
+    <!-- dashboard/templates/dashboard/dashboardhtml -->
+    <style>
+        .card {
+            margin-top: 250px;
+            padding-left: 150px;
+            
+        }
+
+        .card-title {
+            margin-bottom: 50px;
+        }
+    </style>
+    <div class="card text-center" style="22rem">
+        <div class="card-header">
+            <h1>Data Analytics Dashboard</h1>
+        </div>
+        
+        <div class="card-body">
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }} <br>
+                <button type="submit" class="btn btn-primary">Upload File</button>
+            </form>
+        </div>
+        <div id="bar_chart"></div>
+        <script>
+            var barChart = {{ bar_chart_json|safe }};
+            Plotly.newPlot('bar_chart', barChart.data, barChart.layout);
+        </script>
+    </div>
+</div>
+
+{% endblock %}

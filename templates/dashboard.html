@@ -1,0 +1,47 @@
+<!-- dashboard/templates/dashboard/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Analytics Dashboard</title>
+    <!-- Include Plotly library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<div class='container'>
+
+    <h1>Data Analytics Dashboard</h1>
+
+    {% if summary_table %}
+        <!-- Display Summary Statistics Table -->
+        <div>
+            <h2>Summary Statistics</h2>
+            {{ summary_table|safe }}
+        </div>
+    {% endif %}
+
+    {% for chart_id, line_chart_json in line_charts %}
+        <!-- Render Line Chart using the JSON representation -->
+        <div class="line-chart-container">
+            <div id="{{ chart_id }}"></div>
+            <script>
+                var lineChart = {{ line_chart_json|safe }};
+                Plotly.newPlot('{{ chart_id }}', lineChart.data, lineChart.layout);
+            </script>
+        </div>
+    {% endfor %}
+
+    {% for chart_id, bar_chart_json in bar_charts %}
+        <!-- Render Bar Chart using the JSON representation -->
+        <div class="bar-chart-container">
+            <div id="{{ chart_id }}"></div>
+            <script>
+                var barChart = {{ bar_chart_json|safe }};
+                Plotly.newPlot('{{ chart_id }}', barChart.data, barChart.layout);
+            </script>
+        </div>
+    {% endfor %}
+    
+    <!-- Add more chart sections or visualizations as needed -->
+</div>
+</body>
+</html>

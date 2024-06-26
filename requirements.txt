@@ -1,0 +1,7 @@
+django
+numpy 
+pandas
+matplotlib
+seaborn 
+plotly
+dataset
